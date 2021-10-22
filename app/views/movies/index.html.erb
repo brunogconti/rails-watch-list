@@ -1,0 +1,14 @@
+<h1>All the Movies</h1>
+
+<% @movies.each do |movie| %>
+<div class="row">
+  <div class="rol-4">
+    <div class="card">
+      <p><%= movie.title %></p>
+      <img src=<%= movie.poster_url %> alt="">
+      <p><%= movie.overview %></p>
+      <p><%= movie.rating %></p>
+    </div>
+  </div>
+</div>
+<% end %>
