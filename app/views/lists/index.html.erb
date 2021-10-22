@@ -1,0 +1,21 @@
+<h1>All the Lists</h1>
+
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/evlkOfkQ5rE);">
+  <div class="container">
+    <h1><strong>Save Any kind of movies</strong></h1>
+    <p>Classic.</p>
+  </div>
+</div>
+
+<div class="row d-flex">
+  <% @lists.each do |list| %>
+    <div class="col-3">
+      <div class="card border my-4">
+        <p><%= list.name %></p>
+        <%#= image_tag list.poster_url, alt: "List", width: 200 %>
+        <p><%#= list.overview %></p>
+        <p><%#= list.rating %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
