@@ -1,0 +1,29 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.url%>;);">
+  <div class="container ">
+    <h1><strong><%= @list.name %></strong></h1>
+  </div>
+</div>
+
+<div class="container m-5">
+  <div class="row justify-content-end">
+    <div class="col-4">
+      <%= link_to 'Add a Bookmark', new_list_bookmark_path(@list), class: "btn btn-success" %>
+    </div>
+  </div>
+  <div class="row d-flex py-3">
+    <% @list.movies.each do |movie| %>
+      <div class="col-4 card mx-3 p-0" style="width: 18rem;">
+        <img class="card-img-top" src=<%= movie.poster_url %> alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= movie.title %> • <%= movie.rating %> ⭐</h5>
+          <p class="card-text"><%=movie.overview%></p>
+          <div>
+            <% movie.bookmarks.each do |bookmark| %>
+            <p><%= bookmark.comment %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

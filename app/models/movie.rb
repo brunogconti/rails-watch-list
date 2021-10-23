@@ -3,4 +3,10 @@ class Movie < ApplicationRecord
   has_many :list, through: :bookmarks
   validates :title, :overview, presence: true
   validates :title, uniqueness: true
+
+  before_create :floatfy
+
+  def floatfy
+    rating.to_f
+  end
 end
