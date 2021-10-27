@@ -10,25 +10,22 @@
       <%= link_to 'Add a Bookmark', new_list_bookmark_path(@list), class: "btn btn-success" %>
     </div>
   </div>
-  <div class="row d-flex py-3">
+  <div class="row my-2">
     <% @list.movies.each do |movie| %>
-      <div class="col-5 card mx-3 p-0" style="width: 18rem;">
-        <img class="card-img-top" src=<%= movie.poster_url %> alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><%= movie.title %> • <%= movie.rating.to_f %> ⭐</h5>
-          <p class="card-text"><%=movie.overview%></p>
-          <tbody>
-            <% movie.bookmarks.where(list_id: @list).each do |bookmark| %>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="blockquote quote-p">
-                  <strong class="quote">“</strong><%= bookmark.comment %>
-                </div>
-                <div>
-                <%= link_to 'Delete', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %>
-                </div>
+      <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+      <div class="col-12 col-sm-6 mb-4" data-aos="zoom-in">
+        <div class="bg-white rounded shadow h-100">
+          <%= image_tag movie.poster_url, alt: movie.title, class: 'movie-img rounded-top' %>
+          <div class="p-3 rounded-bottom d-flex flex-column">
+            <strong><%= movie.title %> <span class="text-muted font-weight-normal">• <%= movie.rating %> <i class="fas fa-star star-yellow"></i></span></strong>
+            <small class="text-muted"><%= movie.overview %></small>
+            <div class="d-flex align-items-end justify-content-between pt-4">
+              <div>
+                <i class="fas fa-quote-left mr-2"></i><small class="flex-grow-1"><%= bookmark.comment %></small>
               </div>
-            <% end %>
-          </tbody>
+              <small class="text-right flex-shrink-0"><%= link_to 'delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></small>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
